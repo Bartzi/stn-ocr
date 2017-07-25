@@ -19,8 +19,13 @@ In order to use the code you will need the following software environment:
 3. install all requirements with `pip install -r requirements.txt`
 4. clone and install `warp-ctc` from [here](https://github.com/baidu-research/warp-ctc.git)
 5. go into the folder `mxnet/metrics/ctc` and run `python setup.py install`
-6. copy the resulting `.so` file from `mxnet/metrics/ctc/build` to `mxnet/metrics/ctc`
-7. You should be ready to go!
+6. clone the [mxnet repository](https://github.com/dmlc/mxnet.git)
+7. copy the resulting `.so` file from `mxnet/metrics/ctc/build` to `mxnet/metrics/ctc`
+8. checkout the tag `v0.9.3`
+9. add the `warpctc` plugin to the project by enabling it in the file `config.mk`
+10. compile mxnet
+11. install the python bindings of mxnet
+12. You should be ready to go!
 
 # Training
 
@@ -57,8 +62,16 @@ If you want to follow our experiments with svhn numbers placed in a regular grid
 5. start the training using the following command: `python train_svhn.py <path to train.csv> <path to valid.csv> --gpus <gpu id you want to use> --log-dir <where to save the logs> -b <batch size you want ot use> --lr 1e-5`
 6. If you are lucky it will work ;)
 
+## Text Recognition
 
+Following our text recognition experiments might be a little difficult, because we can not offer the entire dataset used by us.
+But it is possible to perform the experiments based on the Synth-90k dataset provided by Jaderberg et al. [here](https://www.robots.ox.ac.uk/~vgg/data/text/#sec-synth).
+After downloading and extracting this file you'll need to adapt the groundtruth file provided with this dataset to fit to the format used by our code. Our format is quite easy.
+You need to create a `csv` file with tabular separated values. The first column is the absolute path to the image and the rest of the line are the labels corresponding to this image.
 
+To train the network you can use the `train_text_recognition.py` script. You can start this script in a similar manner to the `train_svhn.py` script.
+
+## FSNS
 
 
 
