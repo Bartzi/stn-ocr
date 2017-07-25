@@ -1,6 +1,6 @@
 # Towards Semi-Supervised End-to-End Scene Text Recognition
 
-This repository contains the code for the paper: (Insert Name here)[]
+This repository contains the code for the paper: TODO
 
 # Structure of the repository
 
@@ -19,8 +19,8 @@ In order to use the code you will need the following software environment:
 3. install all requirements with `pip install -r requirements.txt`
 4. clone and install `warp-ctc` from [here](https://github.com/baidu-research/warp-ctc.git)
 5. go into the folder `mxnet/metrics/ctc` and run `python setup.py install`
-6. clone the [mxnet repository](https://github.com/dmlc/mxnet.git)
-7. copy the resulting `.so` file from `mxnet/metrics/ctc/build` to `mxnet/metrics/ctc`
+6. copy the resulting `.so` file from `mxnet/metrics/ctc/build` to `mxnet/metrics/ctc`
+7. clone the [mxnet repository](https://github.com/dmlc/mxnet.git)
 8. checkout the tag `v0.9.3`
 9. add the `warpctc` plugin to the project by enabling it in the file `config.mk`
 10. compile mxnet
@@ -80,13 +80,12 @@ In order to redo our experiments on the FSNS dataset you need to perform the fol
 3. Use the `transform_gt.py` script to transform the original fsns groundtruth, which is based on a single line to a groundtruth containing labels for each word individually. A possible usage of the `transform_gt.py` script could look like this:
 	
 	`python transform_gt.py <path to original gt> datasets/fsns/fsns_char_map.json <path to gt that shall be generated>`
-4. Use the `swap_classes.py` script in `datasets/fsns` and swap the class for `space` and `blank` in the gt, by issuing:
+4. Because MXNet expects the blank label to be `0` for the training with CTC Loss, you have to use the `swap_classes.py` script in `datasets/fsns` and swap the class for `space` and `blank` in the gt, by issuing:
 
-	python swap_classes.py <original gt> <swapped gt> 0 133
-	This is necessary because MXNet expects the blank label to be `0` for the training with CTC Loss.
+    `python swap_classes.py <original gt> <swapped gt> 0 133`
 5. After performing these steps you should be able to run the training by issuing:
 
-    python train_fsns.py <path to generated train gt> <path to generated validation gt> --char-map datases/fsns/fsns_char_map.json --blank-label 0
+    `python train_fsns.py <path to generated train gt> <path to generated validation gt> --char-map datases/fsns/fsns_char_map.json --blank-label 0`
 
 # License
 
