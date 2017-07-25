@@ -40,7 +40,7 @@ if __name__ == '__main__':
     labels_per_timestep = 1
     num_rnn_layers = 2
     label_width = 23
-    use_blstm = True
+    use_blstm = False
 
     eval_metric = mx.metric.CompositeEvalMetric(
         metrics=[

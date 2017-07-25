@@ -11,7 +11,9 @@ import mxnet as mx
 import numpy as np
 
 from callbacks.save_bboxes import BBOXPlotter
-from networks.svhn import SVHNMultiLineResNetNetwork
+from metrics.ctc_metrics import strip_prediction
+from networks.text_rec import SVHNMultiLineCTCNetwork
+from operations.disable_shearing import *
 from utils.datatypes import Size
 
 
@@ -21,12 +23,12 @@ Batch = namedtuple('Batch', ['data', 'label'])
 def get_model(args, data_shape, output_size):
     symbol, arg_params, aux_params = mx.model.load_checkpoint(args.model_prefix, args.model_epoch)
 
-    net, loc, transformed_output, size_params = SVHNMultiLineResNetNetwork.get_network(
+    net, loc, transformed_output, size_params = SVHNMultiLineCTCNetwork.get_network(
         data_shape,
         output_size,
+        46,
+        2,
         23,
-        1,
-        1,
     )
 
     output = mx.symbol.Group([loc, transformed_output, net])
@@ -38,15 +40,19 @@ def get_model(args, data_shape, output_size):
         data_shapes=[
             ('data', data_shape),
             ('softmax_label', (1, 23)),
-            ('l0_forward_init_h_state', (1, 256)),
-            ('l0_forward_init_c_state_cell', (1, 256))
+            ('l0_forward_init_h_state', (1, 1, 256)),
+            ('l0_forward_init_c_state_cell', (1, 1, 256)),
+            ('l1_forward_init_h_state', (1, 1, 256)),
+            ('l1_forward_init_c_state_cell', (1, 1, 256)),
         ],
         for_training=False,
         grad_req='null'
     )
 
-    arg_params['l0_forward_init_h_state'] = mx.nd.zeros((1, 256))
-    arg_params['l0_forward_init_c_state_cell'] = mx.nd.zeros((1, 256))
+    arg_params['l0_forward_init_h_state'] = mx.nd.zeros((1, 1, 256))
+    arg_params['l0_forward_init_c_state_cell'] = mx.nd.zeros((1, 1, 256))
+    arg_params['l1_forward_init_h_state'] = mx.nd.zeros((1, 1, 256))
+    arg_params['l1_forward_init_c_state_cell'] = mx.nd.zeros((1, 1, 256))
 
     model.set_params(arg_params, aux_params)
     return model
@@ -78,7 +84,7 @@ if __name__ == "__main__":
     parser.add_argument('--gpus', help='gpus to use for evaluation e.g. 0,1,2,3 if you want to use 4 gpus')
     parser.add_argument('--delimiter', default=';', help='delimiter used in gt file')
     parser.add_argument('--input-width', default=200, type=int, help='input width for network')
-    parser.add_argument('--input-height', default=200, type=int, help='input height for network')
+    parser.add_argument('--input-height', default=64, type=int, help='input height for network')
     parser.add_argument('--blank_symbol', type=int, default=9250, help='utf-8 code for no char class')
     parser.add_argument('--plot', action='store_true', default=False, help='plot bbox predictions and extracted regions')
 
@@ -129,16 +135,12 @@ if __name__ == "__main__":
                 plot_bboxes(bbox_plotter, model, image, idx)
 
             predictions = model.get_outputs()[2].asnumpy()
+           
             predicted_classes = np.argmax(predictions, axis=1)
 
             # cut all word end predictions
-            try:
-                first_no_char_prediction = list(predicted_classes).index(int(reverse_char_map[args.blank_symbol]))
-            except ValueError:
-                first_no_char_prediction = len(predicted_classes) - 1
-            predicted_classes = predicted_classes[:first_no_char_prediction]
-
-            predicted_word = ''.join([chr(char_map[str(p)]) for p in predicted_classes])
+            predicted_classes = strip_prediction(predicted_classes, int(reverse_char_map[args.blank_symbol]))
+            predicted_word = ''.join([chr(char_map[str(p)]) for p in predicted_classes]).replace(' ', '')
 
             distance = editdistance.eval(gt_word, predicted_word)
             print("{} - {}\t\t{}: {}".format(idx, gt_word, predicted_word, distance))

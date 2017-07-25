@@ -102,6 +102,10 @@ Besides this normal plotting to disk it is also possible to directly see this pr
 
 This tool is especially helpful in determining whether the network is learning anything or not. We recommend that you always use this tool while training.
 
+# Evaluation
+
+Coming Soon!
+
 # License
 
 This Code is licensed under the GPLv3 license. Please see further details in LICENSE.md.
@@ -111,3 +115,7 @@ This Code is licensed under the GPLv3 license. Please see further details in LIC
 If you are using this Code please cite the following publication:
 
 	TODO
+
+# A short notice on code quality
+
+The code contains a huge amount of workarounds around MXNet, as we were not able to find any easier way to do what we wanted to do. If you know a better way, pease let us know, as we would like to have code that is better understandable, as now.

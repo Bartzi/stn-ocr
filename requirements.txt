@@ -2,3 +2,4 @@ Cython == 0.26
 matplotlib == 2.0.2
 Pillow == 4.2.1
 tqdm == 4.15.0
+editdistance == 0.3.1
