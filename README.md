@@ -77,9 +77,16 @@ In order to redo our experiments on the FSNS dataset you need to perform the fol
 
 1. Download the fsns dataset using the `download_fsns.py` script located in `datasets/fsns`
 2. Extract the individual images using the `tfrecord_to_image.py` script located in `datasets/fsns/tfrecord_utils` (you will need to install **tensorflow** for doing that)
-3. Use the `transform_gt.py` script to transform the original fsns groundtruth, which is based on a single line to a groundtruth containing labels for each word individually. A possible usage of the `transform_gt.py` script could look like this: `python transform_gt.py <path to original gt> datasets/fsns/fsns_char_map.json <path to gt that shall be generated>`
-4. Use the `swap_classes.py` script in `datasets/fsns` and swap the class for `space` and `blank` in the gt, by issuing: `python swap_classes.py <original gt> <swapped gt> 0 133`. This is necessary because MXNet expects the blank label to be `0` for the training with CTC Loss.
-5. After performing these steps you should be able to run the training by issuing: `python train_fsns.py <path to generated train gt> <path to generated validation gt> --char-map datases/fsns/fsns_char_map.json --blank-label 0`
+3. Use the `transform_gt.py` script to transform the original fsns groundtruth, which is based on a single line to a groundtruth containing labels for each word individually. A possible usage of the `transform_gt.py` script could look like this:
+	
+	`python transform_gt.py <path to original gt> datasets/fsns/fsns_char_map.json <path to gt that shall be generated>`
+4. Use the `swap_classes.py` script in `datasets/fsns` and swap the class for `space` and `blank` in the gt, by issuing:
+
+	python swap_classes.py <original gt> <swapped gt> 0 133
+	This is necessary because MXNet expects the blank label to be `0` for the training with CTC Loss.
+5. After performing these steps you should be able to run the training by issuing:
+
+    python train_fsns.py <path to generated train gt> <path to generated validation gt> --char-map datases/fsns/fsns_char_map.json --blank-label 0
 
 # License
 
