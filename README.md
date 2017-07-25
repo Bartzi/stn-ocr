@@ -44,7 +44,9 @@ In order to do this, you need to follow these steps:
 2. Locate the folder `generated/centered`
 3. open `train.csv` and adapt the paths of all images to the path on your machine (do the same with `valid.csv`)
 4. make sure to prepare your environment as described in installation
-5. start the training by issuing the following command: `python train_svhn.py <path to train.csv> <path to valid.csv> --gpus <gpu id you want to use> --log-dir <where to save the logs> -b <batch size you want ot use> --lr 1e-5 --zoom 0.5 --char-map datasets/svhn/svhn_char_map.json`
+5. start the training by issuing the following command: 
+    
+    `python train_svhn.py <path to train.csv> <path to valid.csv> --gpus <gpu id you want to use> --log-dir <where to save the logs> -b <batch size you want ot use> --lr 1e-5 --zoom 0.5 --char-map datasets/svhn/svhn_char_map.json`
 6. Wait and enjoy.
 
 If you want to do experiments on more challenging images you might need to update some parts of the code in `train_svhn.py`. The parts you might want to update are located around line 40 in this file. Here you can change the max. number of house numbers in the image (`num_timesteps`), the maximum number of characters per house number (`labels_per_timestep`), the number of rnn layers to use for predicting the localization `num_rnn_layers` and whether to use a blstm for predicting the localization or not `use_blstm`.
@@ -86,6 +88,19 @@ In order to redo our experiments on the FSNS dataset you need to perform the fol
 5. After performing these steps you should be able to run the training by issuing:
 
     `python train_fsns.py <path to generated train gt> <path to generated validation gt> --char-map datases/fsns/fsns_char_map.json --blank-label 0`
+
+# Observing the Training Progress
+
+We've added a nice script that makes it possible to see how well the network performs at every step of the training. This progress is normally plotted to disk for each iteration and can later on be used to create animations of the train progress (you can use the `create_gif.py` and `create_video.py` scripts located in `mxnet/utils` for this purpose).
+Besides this normal plotting to disk it is also possible to directly see this progress while the training is running. In order to see this you have to do the following:
+
+1. start the `show_progress.py` script in `mxnet/utils`
+2. start the training with the following additional command line params:
+
+    `--send-bboxes --ip <localhost, or remote ip if you are working on a remote machine> --port <the port the show_progress.py script is running on (default is 1337)`
+3. enjoy!
+
+This tool is especially helpful in determining whether the network is learning anything or not. We recommend that you always use this tool while training.
 
 # License
 
