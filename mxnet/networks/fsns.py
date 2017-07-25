@@ -1,5 +1,5 @@
 import mxnet as mx
-from networks.svhn import LocalizationNetwork
+from networks.text_rec import LocalizationNetwork
 from symbols.lstm import lstm_unroll
 
 

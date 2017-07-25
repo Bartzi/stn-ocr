@@ -18,7 +18,6 @@ if __name__ == "__main__":
     parser.add_argument('tfrecord_dir', help='path to directory containing tfrecord files')
     parser.add_argument('destination_dir', help='path to dir where resulting images shall be saved')
     parser.add_argument('stage', help='stage of training these files are for [e.g. train]')
-    parser.add_argument('--model_str', default='1,150,600,3[S2(4x150)0,2 Ct5,5,16 Mp2,2 Ct5,5,64 Mp3,3([Lrys64 Lbx128][Lbys64 Lbx128][Lfys64 Lbx128])S3(3x0)2,3Lfx128 Lrx128 S0(1x4)0,3 Do Lfx256]O1c134')
 
     args = parser.parse_args()
 

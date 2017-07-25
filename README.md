@@ -44,7 +44,7 @@ In order to do this, you need to follow these steps:
 2. Locate the folder `generated/centered`
 3. open `train.csv` and adapt the paths of all images to the path on your machine (do the same with `valid.csv`)
 4. make sure to prepare your environment as described in installation
-5. start the training by issuing the following command: `python train_svhn.py <path to train.csv> <path to valid.csv> --gpus <gpu id you want to use> --log-dir <where to save the logs> -b <batch size you want ot use> --lr 1e-5 --zoom 0.5`
+5. start the training by issuing the following command: `python train_svhn.py <path to train.csv> <path to valid.csv> --gpus <gpu id you want to use> --log-dir <where to save the logs> -b <batch size you want ot use> --lr 1e-5 --zoom 0.5 --char-map datasets/svhn/svhn_char_map.json`
 6. Wait and enjoy.
 
 If you want to do experiments on more challenging images you might need to update some parts of the code in `train_svhn.py`. The parts you might want to update are located around line 40 in this file. Here you can change the max. number of house numbers in the image (`num_timesteps`), the maximum number of characters per house number (`labels_per_timestep`), the number of rnn layers to use for predicting the localization `num_rnn_layers` and whether to use a blstm for predicting the localization or not `use_blstm`.
@@ -73,5 +73,20 @@ To train the network you can use the `train_text_recognition.py` script. You can
 
 ## FSNS
 
+In order to redo our experiments on the FSNS dataset you need to perform the following steps:
 
+1. Download the fsns dataset using the `download_fsns.py` script located in `datasets/fsns`
+2. Extract the individual images using the `tfrecord_to_image.py` script located in `datasets/fsns/tfrecord_utils` (you will need to install **tensorflow** for doing that)
+3. Use the `transform_gt.py` script to transform the original fsns groundtruth, which is based on a single line to a groundtruth containing labels for each word individually. A possible usage of the `transform_gt.py` script could look like this: `python transform_gt.py <path to original gt> datasets/fsns/fsns_char_map.json <path to gt that shall be generated>`
+4. Use the `swap_classes.py` script in `datasets/fsns` and swap the class for `space` and `blank` in the gt, by issuing: `python swap_classes.py <original gt> <swapped gt> 0 133`. This is necessary because MXNet expects the blank label to be `0` for the training with CTC Loss.
+5. After performing these steps you should be able to run the training by issuing: `python train_fsns.py <path to generated train gt> <path to generated validation gt> --char-map datases/fsns/fsns_char_map.json --blank-label 0`
 
+# License
+
+This Code is licensed under the GPLv3 license. Please see further details in LICENSE.md.
+
+# Citation
+
+If you are using this Code please cite the following publication:
+
+	TODO
