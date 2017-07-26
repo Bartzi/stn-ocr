@@ -1,6 +1,6 @@
-# Towards Semi-Supervised End-to-End Scene Text Recognition
+# STN-OCR: A single Neural Network for Text Detection and Text Recognition
 
-This repository contains the code for the paper: TODO
+This repository contains the code for the paper: [STN-OCR: A single Neural Network for Text Detection and Text Recognition]()
 
 # Structure of the repository
 
@@ -104,7 +104,19 @@ This tool is especially helpful in determining whether the network is learning a
 
 # Evaluation
 
-Coming Soon!
+If you want to evaluate already trained models you can use the evaluation scripts provided in the `mxnet` folder.
+For evaluating a model you need to do the following:
+
+1. train or download a model
+2. choose the correct evaluation script an adapt it, if necessary (take care in case you are fiddling around with the amount of timesteps and number of RNN layers)
+3. Get the dataset you want to evaluate the model on and adapt the groundtruth file to fit the format expected by our software.
+   The format expected by our software is defined as a `csv` (tab separated) file that looks like that:
+   `<absolute path to image> \t <numerical labels each label separated from the other by \t>`
+3. run the chosen evaluation script like so
+
+    `python eval_<type>_model.py <path to model dir>/<prefix of model file> <number of epoch to test> <path to evaluation gt> <path to char map>`
+
+You can use the `eval_text_recognition_model.py` script for evaluating a model trained for text recognition, the `eval_fsns_model.py` for evaluating a model trained on the FSNS dataset.
 
 # License
 
