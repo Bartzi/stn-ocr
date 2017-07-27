@@ -116,7 +116,7 @@ For evaluating a model you need to do the following:
 
     `python eval_<type>_model.py <path to model dir>/<prefix of model file> <number of epoch to test> <path to evaluation gt> <path to char map>`
 
-You can use the `eval_text_recognition_model.py` script for evaluating a model trained for text recognition, the `eval_fsns_model.py` for evaluating a model trained on the FSNS dataset.
+You can use `eval_svhn_model.py` for evaluating a model trained with CTC on the original svhn dataset, the `eval_text_recognition_model.py` script for evaluating a model trained for text recognition, and the `eval_fsns_model.py` for evaluating a model trained on the FSNS dataset.
 
 # License
 
