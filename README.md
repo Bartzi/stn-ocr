@@ -18,14 +18,13 @@ In order to use the code you will need the following software environment:
 2. it might be a good idea to use a `virtualenv`
 3. install all requirements with `pip install -r requirements.txt`
 4. clone and install `warp-ctc` from [here](https://github.com/baidu-research/warp-ctc.git)
-5. go into the folder `mxnet/metrics/ctc` and run `python setup.py install`
-6. copy the resulting `.so` file from `mxnet/metrics/ctc/build` to `mxnet/metrics/ctc`
-7. clone the [mxnet repository](https://github.com/dmlc/mxnet.git)
-8. checkout the tag `v0.9.3`
-9. add the `warpctc` plugin to the project by enabling it in the file `config.mk`
-10. compile mxnet
-11. install the python bindings of mxnet
-12. You should be ready to go!
+5. go into the folder `mxnet/metrics/ctc` and run `python setup.py build_ext --inplace`
+6. clone the [mxnet repository](https://github.com/dmlc/mxnet.git)
+7. checkout the tag `v0.9.3`
+8. add the `warpctc` plugin to the project by enabling it in the file `config.mk`
+9. compile mxnet
+10. install the python bindings of mxnet
+11. You should be ready to go!
 
 # Training
 
