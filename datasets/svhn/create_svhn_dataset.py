@@ -402,8 +402,3 @@ if __name__ == "__main__":
         variance=args.variance,
     )
     dataset_creator.create_dataset(args.num_samples, destination_dir, args.max_label_length, start=start)
-    # sample, _ = dataset_creator.create_sample()
-    # sample = sample.convert("RGB")
-    # sample.save(os.path.join(args.destination_dir, "example.png"))
-    # sample.show()
-
