@@ -1,6 +1,6 @@
 # STN-OCR: A single Neural Network for Text Detection and Text Recognition
 
-This repository contains the code for the paper: [STN-OCR: A single Neural Network for Text Detection and Text Recognition]()
+This repository contains the code for the paper: [STN-OCR: A single Neural Network for Text Detection and Text Recognition](https://arxiv.org/abs/1707.08831)
 
 # Structure of the repository
 
@@ -129,7 +129,7 @@ If you are using this Code please cite the following publication:
     Author = {Christian Bartz, Haojin Yang, Christoph Meinel},
     journal = {ArXiv e-prints},
     archivePrefix = "arXiv",
-    eprint = {TODO},
+    eprint = {1707.08831},
     Title = {STN-OCR: A single Neural Network for Text Detection and Text Recognition},
     Year = {2017}
     }
