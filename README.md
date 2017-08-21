@@ -134,6 +134,6 @@ If you are using this Code please cite the following publication:
     Year = {2017}
     }
 
-# A short notice on code quality
+# A short note on code quality
 
 The code contains a huge amount of workarounds around MXNet, as we were not able to find any easier way to do what we wanted to do. If you know a better way, pease let us know, as we would like to have code that is better understandable, as now.
