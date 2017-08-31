@@ -125,13 +125,11 @@ This Code is licensed under the GPLv3 license. Please see further details in LIC
 
 If you are using this Code please cite the following publication:
 
-    @article{stn-ocr,
-    Author = {Christian Bartz, Haojin Yang, Christoph Meinel},
-    journal = {ArXiv e-prints},
-    archivePrefix = "arXiv",
-    eprint = {1707.08831},
-    Title = {STN-OCR: A single Neural Network for Text Detection and Text Recognition},
-    Year = {2017}
+    @article{bartz2017stn,
+      title={STN-OCR: A single Neural Network for Text Detection and Text Recognition},
+      author={Bartz, Christian and Yang, Haojin and Meinel, Christoph},
+      journal={arXiv preprint arXiv:1707.08831},
+      year={2017}
     }
 
 # A short note on code quality
