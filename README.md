@@ -32,7 +32,7 @@ You can use this code to train models for three different tasks.
 
 ## SVHN House Number Recognition
 
-The file `train_svhn.py` is the entry point for training a network using our [purpose build svhn datasets](https://bartzi.de/research/see).
+The file `train_svhn.py` is the entry point for training a network using our [purpose build svhn datasets](https://bartzi.de/research/stn-ocr).
 The file as such is ready to train a network capable of finding a single house number placed randomly on an image.
 
 Example:
