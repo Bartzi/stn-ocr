@@ -2,6 +2,10 @@
 
 This repository contains the code for the paper: [STN-OCR: A single Neural Network for Text Detection and Text Recognition](https://arxiv.org/abs/1707.08831)
 
+# Please note that we refined our approach and released new source code. You can find the code [here](https://github.com/Bartzi/see)
+Please use the new code, if you want to experiment with FSNS like data and our approach. It should also be easy to redo the text recognition experiments with the new code, although we did not release any code for that.
+
+
 # Structure of the repository
 
 The folder `datasets` contains code related to datasets used in the paper.
